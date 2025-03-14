@@ -1,5 +1,5 @@
 from django.http import request
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from trade.forms import ContactForm
 from trade.models import Contact
@@ -38,9 +38,33 @@ def starter_page(request):
 def get_a_quote(request):
     return render(request, 'get-a-quote.html')
 
-def messagelist(request):
-    return render(request, 'messagelist.html')
 
-def messagelist (request):
+
+def contactlist (request):
     contact = Contact.objects.all()
-    return render(request, 'messagelist.html', {'contact': contact})
+    return render(request, 'contactlist.html', {'contact': contact})
+
+
+def updatecontact(request,id):
+    message = get_object_or_404(Contact, id=id)
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('contactlist')
+    else:
+        form = ContactForm(instance = message)
+    return render(request, 'update-contact.html', {'form': form})
+
+
+
+def deletecontact(request,id):
+    message = get_object_or_404(Contact, id=id)
+    try:
+        message.delete()
+    except Exception as e:
+        message.error(request, 'contact not deleted')
+    return redirect('contactlist')
+
+
+

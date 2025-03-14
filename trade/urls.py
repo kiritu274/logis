@@ -29,5 +29,7 @@ urlpatterns = [
     path('services-details/', views.services_details, name='services-details'),
     path('starter-page/', views.starter_page, name='starter-page'),
     path('get-a-quote/', views.get_a_quote, name='get-a-quote'),
-    path('messagelist/',views.messagelist, name='messagelist'),
+    path('contactlist/',views.contactlist, name='contactlist'),
+    path('updatecontact/<int:id>/', views.updatecontact, name='updatecontact'),
+    path('deletecontact/<int:id>/', views.deletecontact, name='deletecontact'),
 ]
