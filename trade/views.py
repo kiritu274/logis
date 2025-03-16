@@ -44,3 +44,14 @@ def messagelist(request):
 def messagelist (request):
     contact = Contact.objects.all()
     return render(request, 'messagelist.html', {'contact': contact})
+
+def stk (request):
+    return render(request, 'stk.html')
+
+def checkout(request):
+    product_id = request.GET.get('product_id')
+    price = request.GET.get('price')
+
+    if product_id and product_id  == "1":
+
+     return render(request, 'checkout.html', {'product_id': product_id, 'price': price})
