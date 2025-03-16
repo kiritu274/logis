@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/', views.index, name='index'),
     path('about/', views.about, name='about'),
+    path('pricing/pay/',views.pay,name='pay'),
     path('contact/', views.contact, name='contact'),
     path('pricing/', views.pricing, name='pricing'),
     path('services/', views.services, name='services'),
@@ -32,4 +33,9 @@ urlpatterns = [
     path('contactlist/',views.contactlist, name='contactlist'),
     path('updatecontact/<int:id>/', views.updatecontact, name='updatecontact'),
     path('deletecontact/<int:id>/', views.deletecontact, name='deletecontact'),
+    #path('initiate-mpesa-payment/',views.initiate_mpesa_payment,'initiate_mpesa_payment'),
+    path('initiate-mpesa-payment/', views.initiate_mpesa_payment),
+
+
+
 ]

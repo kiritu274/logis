@@ -29,7 +29,7 @@
 
         <div class="row gy-4">
 
-          <div class="col-lg-4">
+          <div class="col-lg-6 mt-7">
             <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
               <i class="bi bi-geo-alt flex-shrink-0"></i>
               <div>
@@ -87,13 +87,15 @@
 <!--              </div>-->
 <!--            </form>-->
 <!--          </div>&lt;!&ndash; End Contact Form &ndash;&gt;-->
-
-          <form action="" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form }}
-            <button class="btn btn-primary mt-3">SUBMIT</button>
-          </form>
-
+        <div class="login-container col-lg-6">
+            <div class="login-box">
+              <form action="" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ form }}
+                  <button class="btn btn-primary mt-3">SUBMIT</button>
+              </form>
+            </div>
+        </div>
 
         </div>
 

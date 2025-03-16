@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+
+<form action="{% url 'initiate_mpesa_payment' %}" method="POST">
+  {% csrf_token %}
+  <input type="text" name="phone_number" placeholder="Your phone number" required />
+  <input type="number" name="amount" placeholder="amount" required />
+  <button type="submit">Pay via M-pesa</button>
+</form>
+{% endblock%}

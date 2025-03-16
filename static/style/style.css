@@ -1067,6 +1067,23 @@ section,
   left: calc(50% - 47px);
   top: calc(50% - 47px);
 }
+.login-container {
+   position:relative;
+   background:#222;
+   padding: 20px;
+   border-radius: 1opx;
+   box-shadow: 0 0 15px #0ff,0 0 25px #f0f;
+
+
+
+}
+.login-box{
+   text-align: center;
+   padding:20px;
+   background:#000;
+   border-radius:8px;
+
+}
 
 /*--------------------------------------------------------------
 # Services Section
