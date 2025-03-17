@@ -1,8 +1,8 @@
 from django import forms
 
-from trade.models import Contact
+from .models import Contact
 
-class ContactForm(forms.ModelForm):
+class ContactForm(forms.Form):
     class Meta:
         model = Contact
         fields = ('first_name', 'last_name', 'email', 'message')
@@ -12,3 +12,5 @@ class ContactForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-control','placeholder': 'Email'}),
             'message': forms.Textarea(attrs={'class': 'form-control','placeholder': 'Message'}),
         }
+
+

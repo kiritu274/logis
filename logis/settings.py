@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 import pymysql
@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'trade',
     'rest_framework',
+    'corsheaders',
+    'django_daraja'
 ]
 
 MIDDLEWARE = [
@@ -55,7 +57,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True  # Allow all for now (change this in production)
 
 ROOT_URLCONF = 'logis.urls'
 
@@ -131,6 +136,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
+    os.path.join(BASE_DIR, "static", "build", "static"),
 ]
 
 
@@ -138,3 +144,13 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MPESA_ENVIRONMENT = 'sandbox'
+MPESA_CONSUMER_KEY = 'UshVBC3QABUGMmmXB9EGtB1Y2p1IJY12KDmFzbSuMlbpXcQ7'
+MPESA_CONSUMER_SECRET = 'UtCRBHyc25A8ifls7xe4yWz5AtiHhf4SCVWsIJuQv92ks2fldjCI7z3ZpNw2n3w4'
+MPESA_SHORTCODE = '174379'
+MPESA_EXPRESS_SHORTCODE = '174379'
+MPESA_SHORTCODE_TYPE = 'paybill'
+MPESA_PASSKEY = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919'
+MPESA_INITIATOR_USERNAME = 'testapi'
+MPESA_INITIATOR_SECURITY_CREDENTIALS = 'Safaricom123!!'

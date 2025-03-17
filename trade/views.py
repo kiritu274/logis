@@ -1,13 +1,23 @@
-from django.http import request
-from django.shortcuts import render, redirect
+from django.http import request, JsonResponse, HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
+from django_daraja.mpesa.core import MpesaClient
+from django import forms
 
-from trade.forms import ContactForm
-from trade.models import Contact
+from .forms import ContactForm
+from .models import Contact
+import base64
+import datetime
+import requests
+from django.conf import settings
+from requests.auth import HTTPBasicAuth
 
 
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
+
+def pay(request):
+    return render(request,'trade/pay.html')
 
 def about(request):
     return render(request, 'about.html')
@@ -38,20 +48,31 @@ def starter_page(request):
 def get_a_quote(request):
     return render(request, 'get-a-quote.html')
 
-def messagelist(request):
-    return render(request, 'messagelist.html')
 
-def messagelist (request):
+#
+def contactlist (request):
     contact = Contact.objects.all()
-    return render(request, 'messagelist.html', {'contact': contact})
+    return render(request, 'contactlist.html', {'contact': contact})
 
-def stk (request):
-    return render(request, 'stk.html')
 
-def checkout(request):
-    product_id = request.GET.get('product_id')
-    price = request.GET.get('price')
+def updatecontact(request,id):
+    message = get_object_or_404(Contact, id=id)
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('contactlist')
+    else:
+        form = ContactForm(instance = message)
+    return render(request, 'update-contact.html', {'form': form})
 
-    if product_id and product_id  == "1":
 
-     return render(request, 'checkout.html', {'product_id': product_id, 'price': price})
+
+def deletecontact(request,id):
+    message = get_object_or_404(Contact, id=id)
+    try:
+        message.delete()
+    except Exception as e:
+        message.error(request, 'contact not deleted')
+    return redirect('contactlist')
+

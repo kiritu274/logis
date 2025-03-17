@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+
+<form action="{% url 'mpesaapi' %}" method="POST">
+  {% csrf_token %}
+  <label for="phone_number">Enter Your phone number:</label>
+  <input type="text" id="phone_number" name="phone_number" placeholder=""required ><br><br>
+  <label for="amount">Amount To Pay</label>
+
+  <input type="number" id="amount" name="amount" placeholder="Enter Amount" required> <br><br>
+  <button type="submit">make payments</button>
+
+</form>
+{% endblock%}
